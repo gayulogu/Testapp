@@ -1,0 +1,40 @@
+<router-outlet>
+
+  <table>
+    <tr *ngFor="let detail of details">
+      <th>
+        <h1> {{detail.title}}</h1>
+      </th>
+    </tr>
+    <tr>
+      <td>
+        <h4>{{detail.body}}</h4>
+      </td>
+    </tr>
+  </table>
+  <table *ngIf="comments">
+
+
+
+    <!-- ADD HEADERS -->
+    <tr>
+      <!--<th>id</th> -->
+
+      <th style="text-align: left">comment</th>
+    </tr>
+
+    <!-- BIND ARRAY TO TABLE -->
+    <tr *ngFor="let comment of comments">
+
+      <td>
+        <li>
+          <label> By : {{comment.name}} </label>
+          <br>
+          <label>Email :{{comment.email}}</label>
+          <br>
+          <label>{{comment.body}}</label>
+        </li>
+      </td>
+    </tr>
+  </table>
+</router-outlet>

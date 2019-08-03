@@ -1,0 +1,41 @@
+<router-outlet>
+  <div style="text-align:left;width:500px;">
+    <h1 align=center>{{title}}</h1>
+
+
+    <table *ngIf="users">
+      <!-- ADD HEADERS -->
+      <tr>
+        <!--<th>id</th> -->
+        <th>Name</th>
+        <th>Company Details</th>
+        <th>Blog Posts</th>
+      </tr>
+
+      <!-- BIND ARRAY TO TABLE -->
+      <tr *ngFor="let user of users">
+        <!--  <td>{{user.id}}</td> -->
+        <td>{{user.name}}</td>
+        <td>
+          <label>Name :</label>{{user.company.name}}
+          <br/>
+          <label>BS :</label>{{user.company.bs}}
+          <br/>
+          <label>CatchPharse :</label> {{user.company.catchPhrase}}
+        </td>
+        <td>
+          <button [class.selected]="user.id === selecteduserId" (click)="onSelect(user.id)">
+            View </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <ul>
+
+    <li *ngFor="let user of users">
+
+      {{user.name}}
+    </li>
+  </ul>
+</router-outlet>
+<app-post [userId]="selecteduserId"></app-post>

@@ -1,0 +1,19 @@
+<router-outlet>
+
+    <div style="text-align:left;width:500px;">
+        <table *ngIf="posts">
+            <tr>
+                <th>Posts</th>
+            </tr>
+
+            <tr *ngFor="let post of posts">
+                <td>
+                    <button [class.selected]="post.id === selectedPost" (click)="onSelect(post.id)">
+                        {{post.title}} </button>
+
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</router-outlet>
