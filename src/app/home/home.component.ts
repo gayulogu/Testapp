@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
   onSelect(id: number): void {
     this.selecteduserId = id;
     console.log(this.selecteduserId);
-    this.router.navigateByUrl('/posts')
+    // this.router.navigateByUrl('/posts')
   }
 
 }

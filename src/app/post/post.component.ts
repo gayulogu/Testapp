@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PostService } from './post.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 interface Posts {
   title: string,
@@ -14,22 +14,38 @@ interface Posts {
 })
 export class PostComponent implements OnInit {
   @Input() userId: number;
+  public id: any;
   public posts: any;
   public selectedPost: number;
-  constructor(private _postsService: PostService, private router: Router) {
+  constructor(private _postsService: PostService,
+    private router: Router,
+    private _Activatedroute: ActivatedRoute) {
+    this.id = this._Activatedroute.snapshot.paramMap.get("id");
   }
 
 
   ngOnInit() {
+    // this.id = this._Activatedroute.snapshot.paramMap.get("id");
     this.getPosts();
   }
   getPosts() {
-    this._postsService.getPosts().subscribe(
+    /*  this.posts = this._Activatedroute.paramMap.subscribe(params => {
+       console.log(params);
+       this.id = params.get('id');
+       let result_posts = this._postsService.getPosts();
+       this.posts = result_posts.find(p => p.userId == this.id);
+     });
+  */
+
+    this._postsService.getPosts(this.id).subscribe(
       result_posts => { this.posts = result_posts },
       err => { console.error(err) },
-      () => { console.log("Posts Loaded") }
-    );
+      () => { console.log("Posts Loaded") });
+
   }
+
+
+
 
   onSelect(id: number): void {
     this.selectedPost = id;

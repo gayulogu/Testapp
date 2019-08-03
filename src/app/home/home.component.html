@@ -24,8 +24,8 @@
           <label>CatchPharse :</label> {{user.company.catchPhrase}}
         </td>
         <td>
-          <button [class.selected]="user.id === selecteduserId" (click)="onSelect(user.id)">
-            View </button>
+          <a [class.selected]="user.id === selecteduserId" (click)="onSelect(user.id)" [routerLink]="['/posts',user.id]">
+            View </a>
         </td>
       </tr>
     </table>

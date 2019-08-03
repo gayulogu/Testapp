@@ -6,12 +6,9 @@
         <h1> {{detail.title}}</h1>
       </th>
     </tr>
-    <tr>
-      <td>
-        <h4>{{detail.body}}</h4>
-      </td>
-    </tr>
+
   </table>
+  <button (click)=getComments()>comments</button>
   <table *ngIf="comments">
 
 
@@ -34,6 +31,7 @@
           <br>
           <label>{{comment.body}}</label>
         </li>
+        <button (click)=delete(comment.id)>Delete</button>
       </td>
     </tr>
   </table>

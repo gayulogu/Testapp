@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { PostDetailsService } from './post-details.service';
 
 interface Comments {
@@ -24,12 +24,19 @@ interface Post_Body {
 })
 export class PostDetailsComponent implements OnInit {
   public details: any;
-  public comments: any
-  constructor(private _postDetailsService: PostDetailsService, private router: Router) { }
+  public postid: any;
+  public userId: any;
+  public comments: any;
+  public deleted: false;
+  constructor(private _postDetailsService: PostDetailsService, private router: Router,
+    private _Activatedroute: ActivatedRoute) {
+    this.postid = this._Activatedroute.snapshot.paramMap.get("id");
+    this.userId = this._Activatedroute.snapshot.paramMap.get("userId");
+  }
 
   ngOnInit() {
     this.getPostDetails();
-    this.getComments();
+    //this.getComments();
   }
   getPostDetails() {
     this._postDetailsService.getPostDetails().subscribe(
@@ -45,5 +52,14 @@ export class PostDetailsComponent implements OnInit {
       err => console.error(err),
       () => console.log('Comments loaded')
     );
+  }
+
+  delete(id) {
+    this._postDetailsService.delete(id).subscribe(
+      comments_result => { },
+      err => console.error(err),
+      () => console.log('Comments deleted')
+    );
+    return true;
   }
 }
